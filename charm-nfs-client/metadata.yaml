@@ -1,0 +1,13 @@
+# Copyright 2021 bdx
+# See LICENSE file for licensing details.
+name: nfs-client
+description: |
+  This charm provides an nfs server as installed via apt-get.
+summary: |
+  This charm provides an nfs server as installed via apt-get.
+series: [focal]
+
+
+requires:
+  nfs:
+    interface: nfs
