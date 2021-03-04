@@ -50,16 +50,16 @@ class PeerRelation(Object):
         )
 
     def _on_relation_created(self, event):
-        logger.debug("##### NFS_CLIENT_PEER RELATION CREATED")
+        logger.debug("##### NFS_CLIENT_PEER RELATION CREATED EVENT")
 
     def _on_relation_joined(self, event):
-        logger.debug("##### NFS_CLIENT_PEER RELATION JOINED")
+        logger.debug("##### NFS_CLIENT_PEER RELATION JOINED EVENT")
 
     def _on_relation_changed(self, event):
-        logger.debug("##### NFS_CLIENT_PEER RELATION CHANGED")
+        logger.debug("##### NFS_CLIENT_PEER RELATION CHANGED EVENT")
 
     def _on_relation_departed(self, event):
-        logger.debug("##### NFS_CLIENT_PEER RELATION DEPARTED")
+        logger.debug("##### NFS_CLIENT_PEER RELATION DEPARTED EVENT")
 
     def _on_relation_broken(self, event):
-        logger.debug("##### NFS_CLIENT_PEER RELATION BROKEN")
+        logger.debug("##### NFS_CLIENT_PEER RELATION BROKEN EVENT")

@@ -28,7 +28,7 @@ class CharmNFSServer(CharmBase):
         super().__init__(*args)
 
         self._nfs = NFS(self, "nfs")
-        self._peer = PeerRelation(self, "nfs-peer")
+        self._peer = PeerRelation(self, "nfs-server-peer")
 
         self.framework.observe(self.on.install, self._on_install)
 

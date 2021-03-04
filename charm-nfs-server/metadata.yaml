@@ -13,5 +13,5 @@ provides:
     interface: nfs
 
 peers:
-  nfs-peer:
-    interface: nfs-peer
+  nfs-server-peer:
+    interface: nfs-server-peer

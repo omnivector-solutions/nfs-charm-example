@@ -13,5 +13,5 @@ requires:
     interface: nfs
 
 peers:
-  nfs-client:
-    interface: nfs-client
+  nfs-client-peer:
+    interface: nfs-client-peer
