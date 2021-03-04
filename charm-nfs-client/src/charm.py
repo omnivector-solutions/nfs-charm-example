@@ -45,25 +45,25 @@ class CharmNFSClient(CharmBase):
         self.framework.observe(self.on.remove, self._on_remove)
 
     def _on_install(self, event):
-        logger.debug("####### NFS CLIENT INSTALL EVENT")
+        logger.debug("####### NFS - CLIENT INSTALL EVENT")
 
     def _on_start(self, event):
-        logger.debug("####### NFS CLIENT START EVENT")
+        logger.debug("####### NFS - CLIENT START EVENT")
 
     def _on_config_changed(self, event):
-        logger.debug("####### NFS CLIENT CONFIG_CHANGED EVENT")
+        logger.debug("####### NFS - CLIENT CONFIG_CHANGED EVENT")
 
     def _on_update_status(self, event):
-        logger.debug("####### NFS SERVER UPDATE STATUS EVENT")
+        logger.debug("####### NFS - CLIENT UPDATE STATUS EVENT")
 
     def _on_upgrade_charm(self, event):
-        logger.debug("####### NFS CLIENT UPGRADE_CHARM EVENT")
+        logger.debug("####### NFS - CLIENT UPGRADE_CHARM EVENT")
 
     def _on_stop(self, event):
-        logger.debug("####### NFS CLIENT STOP EVENT")
+        logger.debug("####### NFS - CLIENT STOP EVENT")
 
     def _on_remove(self, event):
-        logger.debug("####### NFS SERVER REMOVE EVENT")
+        logger.debug("####### NFS - CLIENT REMOVE EVENT")
 
 
 if __name__ == "__main__":
