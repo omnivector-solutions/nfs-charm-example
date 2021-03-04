@@ -44,16 +44,16 @@ class NFS(Object):
         )
 
     def _on_relation_created(self, event):
-        logger.debug("####### NFS RELATION CREATED")
+        logger.debug("####### NFS - SERVER RELATION CREATED")
 
     def _on_relation_joined(self, event):
-        logger.debug("####### NFS RELATION JOINED")
+        logger.debug("####### NFS - SERVER RELATION JOINED")
 
     def _on_relation_changed(self, event):
-        logger.debug("####### NFS RELATION CHANGED")
+        logger.debug("####### NFS - SERVER RELATION CHANGED")
 
     def _on_relation_departed(self, event):
-        logger.debug("####### NFS RELATION DEPARTED")
+        logger.debug("####### NFS - SERVER RELATION DEPARTED")
 
     def _on_relation_broken(self, event):
-        logger.debug("####### NFS RELATION BROKEN")
+        logger.debug("####### NFS - SERVER RELATION BROKEN")
