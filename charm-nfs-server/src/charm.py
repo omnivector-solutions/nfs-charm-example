@@ -11,61 +11,20 @@ NFS client to relate.
 import logging
 import subprocess
 
-from pathlib import Path
+# from pathlib import Path
 
 from ops.charm import CharmBase
 from ops.main import main
-from ops.model import ActiveStatus, BlockedStatus
-from ops.framework import Object
+# from ops.model import ActiveStatus, BlockedStatus
+
+from nfs_relation import NFS
+from nfs_peer import PeerRelation
+
 
 logger = logging.getLogger(__name__)
 
 
-class NFS(Object):
-    """NFS client relation interface."""
-
-    def __init__(self, charm, relation_name):
-        super().__init__(charm, relation_name)
-        self._charm = charm
-        self._relation_name = relation_name
-        self.framework.observe(
-            self._charm.on[self._relation_name].relation_created,
-            self._on_relation_created
-        )
-        self.framework.observe(
-            self._charm.on[self._relation_name].relation_joined,
-            self._on_relation_joined
-        )
-        self.framework.observe(
-            self._charm.on[self._relation_name].relation_changed,
-            self._on_relation_changed
-        )
-        self.framework.observe(
-            self._charm.on[self._relation_name].relation_departed,
-            self._on_relation_departed
-        )
-        self.framework.observe(
-            self._charm.on[self._relation_name].relation_broken,
-            self._on_relation_broken
-        )
-
-    def _on_relation_created(self, event):
-        pass
-
-    def _on_relation_joined(self, event):
-        pass
-
-    def _on_relation_changed(self, event):
-        pass
-
-    def _on_relation_departed(self, event):
-        pass
-
-    def _on_relation_broken(self, event):
-        pass
-
-
-class CharmNfsServerCharm(CharmBase):
+class CharmNFSServer(CharmBase):
     """Charm NFS server."""
 
     def __init__(self, *args):
@@ -73,40 +32,69 @@ class CharmNfsServerCharm(CharmBase):
         super().__init__(*args)
 
         self._nfs = NFS(self, "nfs")
+        self._peer = PeerRelation(self, "nfs-peer")
 
         self.framework.observe(self.on.install, self._on_install)
+
+        self.framework.observe(self.on.start, self._on_start)
+
+        self.framework.observe(self.on.config_changed, self._on_config_changed)
+
         self.framework.observe(self.on.update_status, self._on_update_status)
+
+        self.framework.observe(self.on.upgrade_charm, self._on_upgrade_charm)
+
+        self.framework.observe(self.on.stop, self._on_stop)
+
+        self.framework.observe(self.on.remove, self._on_remove)
 
     def _on_install(self, event):
         """Install the NFS server."""
-        shared_mount_point = "/srv/slurm"
-        subprocess.call(["apt", "install", "nfs-kernel-server", "-y"])
-        subprocess.call(["mkdir", shared_mount_point, "-p"])
-        subprocess.call(["chown", "nobody:nogroup", shared_mount_point])
-        subprocess.call(["chmod", "777", shared_mount_point])
+#        shared_mount_point = "/srv/slurm"
+#        subprocess.call(["apt", "install", "nfs-kernel-server", "-y"])
+#        subprocess.call(["mkdir", shared_mount_point, "-p"])
+#        subprocess.call(["chown", "nobody:nogroup", shared_mount_point])
+#        subprocess.call(["chmod", "777", shared_mount_point])
+#
+#        nfs_exports_path = Path("/etc/exports")
+#        if nfs_exports_path.exists():
+#            nfs_exports_path.unlink()
+#
+#        nfs_exports_path.write_text(
+#            f"{shared_mount_point}  *(rw,sync,no_subtree_check)"
+#        )
+#
+#        subprocess.call(["exportfs", "-a"])
+#        subprocess.call(["systemctl", "restart", "nfs-kernel-server"])
+#
+#        self._on_update_status(event)
+        logger.debug("####### NFS SERVER INSTALL EVENT")
 
-        nfs_exports_path = Path("/etc/exports")
-        if nfs_exports_path.exists():
-            nfs_exports_path.unlink()
+    def _on_start(self, event):
+        logger.debug("####### NFS SERVER START EVENT")
 
-        nfs_exports_path.write_text(
-            f"{shared_mount_point}  *(rw,sync,no_subtree_check)"
-        )
+    def _on_config_changed(self, event):
+        logger.debug("####### NFS SERVER CONFIG_CHANGED EVENT")
 
-        subprocess.call(["exportfs", "-a"])
-        subprocess.call(["systemctl", "restart", "nfs-kernel-server"])
+    def _on_upgrade_charm(self, event):
+        logger.debug("####### NFS SERVER UPGRADE_CHARM EVENT")
 
-        self._on_update_status(event)
+    def _on_stop(self, event):
+        logger.debug("####### NFS SERVER STOP EVENT")
+
+    def _on_remove(self, event):
+        logger.debug("####### NFS SERVER REMOVE EVENT")
 
     def _on_update_status(self, event):
         """"Update the unit status."""
-        if not _is_nfs_available():
-            self.unit.status = BlockedStatus(
-                "nfs server cannot start, please debug"
-            )
-            return
-
-        self.unit.status = ActiveStatus("nfs server available")
+#        if not _is_nfs_available():
+#            self.unit.status = BlockedStatus(
+#                "nfs server cannot start, please debug"
+#            )
+#            return
+#
+#        self.unit.status = ActiveStatus("nfs server available")
+        logger.debug("####### NFS SERVER UPDATE_STATUS EVENT")
 
 
 def _is_nfs_available() -> bool:
@@ -121,4 +109,4 @@ def _is_nfs_available() -> bool:
 
 
 if __name__ == "__main__":
-    main(CharmNfsServerCharm)
+    main(CharmNFSServer)

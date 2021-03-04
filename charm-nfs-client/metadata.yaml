@@ -11,3 +11,7 @@ series: [focal]
 requires:
   nfs:
     interface: nfs
+
+peers:
+  nfs-client:
+    interface: nfs-client

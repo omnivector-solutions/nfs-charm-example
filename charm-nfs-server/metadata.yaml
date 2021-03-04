@@ -11,3 +11,7 @@ series: [focal]
 provides:
   nfs:
     interface: nfs
+
+peers:
+  nfs-peer:
+    interface: nfs-peer
